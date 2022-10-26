@@ -1,22 +1,23 @@
-const usersData = require('../FakeData');
+const myUserLoginResolver = require('./resolvers/myUserLoginResolver');
+const getAllTodosResolver = require('./resolvers/getAllTodosResolver');
+const getThisTodoResolver = require('./resolvers/getThisTodoResolver');
+const userSignupResolver = require('./resolvers/userSignupResolver');
+const createTodoResolver = require('./resolvers/createTodoResolver');
+const updateTodoResolver = require('./resolvers/updateTodoResolver');
+const deleteTodoResolver = require('./resolvers/deleteTodoResolver');
+
 const resolvers = {
     Query: {
-        users: () => {
-            return usersData;
-        },
-        login: (parent, args) => {
-            const {username, password} = args.input;
-            var user = usersData.filter((user) => user.username == username && user.password == password)[0];
-            if(user) return `user ${username} successfully logged in`;
-            else return `invalid credentials, login failed...`;
-        },
-        todos: (parent, args) => {
-            const { username } = args.input;
-            var user = usersData.filter((user) => user.username == username)[0];
-            if(!user) return `invalid credentials, login failed...`;
-            var todos = user.todo;
-            return todos; 
-        }
+        getAllUsers: (parent, args) => usersData,
+        myUserLogin: (parent, args) => myUserLoginResolver,
+        getAllTodos: (parent, args) => getAllTodosResolver,
+        getThisTodo: (parent, args) => getThisTodoResolver
+    },
+    Mutation: {
+        userSignup: (parent, args) => userSignupResolver,
+        createTodo: (parent, args) => createTodoResolver,
+        updateTodo: (parent, args) => updateTodoResolver,
+        deleteTodo: (parent, args) => deleteTodoResolver
     }
 }
 module.exports = resolvers;

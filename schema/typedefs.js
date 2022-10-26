@@ -10,23 +10,20 @@ const typeDefs = gql`
         password: String!
         todo: [Todo!]
     }
-    
+
     type Query {
-        users: [User!]!
+        getAllUsers: [User!]
         myUserLogin(input: AuthInput!): String!
-        getAllTodos(input: Credentials!): [Todo!]
-        getThisTodo(input: Credentials! ,id: ID!): Todo
+        getAllTodos: [Todo!]
+        getThisTodo(id: ID!): Todo
     }
     type Mutation {
-        userSignup(input: AuthInput!): String!
-        createTodo(input: Credentials!): Todo
-        updateTodo(input: Credentials!, id: ID!): Todo
-        deleteTodo(input: Credentials!, id: ID!): ID!
+        userSignup(input: AuthInput!): User!
+        createTodo(input: String!): Todo!
+        updateTodo(id: ID!, input: String!): Todo
+        deleteTodo(id: ID!): ID!
     }
 
-    input Credentials {
-        username: String!
-    }
     input AuthInput {
         username: String!
         password: String!

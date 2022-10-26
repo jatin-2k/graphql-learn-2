@@ -5,19 +5,20 @@ const userSignupResolver = require('./resolvers/userSignupResolver');
 const createTodoResolver = require('./resolvers/createTodoResolver');
 const updateTodoResolver = require('./resolvers/updateTodoResolver');
 const deleteTodoResolver = require('./resolvers/deleteTodoResolver');
+const usersData = require('../FakeData');
 
 const resolvers = {
     Query: {
-        getAllUsers: (parent, args) => usersData,
-        myUserLogin: (parent, args) => myUserLoginResolver,
-        getAllTodos: (parent, args) => getAllTodosResolver,
-        getThisTodo: (parent, args) => getThisTodoResolver
+        getAllUsers: () => usersData,
+        myUserLogin: myUserLoginResolver,
+        getAllTodos: getAllTodosResolver,
+        getThisTodo: getThisTodoResolver
     },
     Mutation: {
-        userSignup: (parent, args) => userSignupResolver,
-        createTodo: (parent, args) => createTodoResolver,
-        updateTodo: (parent, args) => updateTodoResolver,
-        deleteTodo: (parent, args) => deleteTodoResolver
+        userSignup: userSignupResolver,
+        createTodo: createTodoResolver,
+        updateTodo: updateTodoResolver,
+        deleteTodo: deleteTodoResolver
     }
 }
 module.exports = resolvers;
